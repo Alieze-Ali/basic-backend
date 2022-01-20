@@ -18,4 +18,12 @@ server.get('/', (req, res) => {
     })
 })
 
+server.use((err, req, res, next) => {
+    console.log(err.message || 'broken')
+    res.status(err.status || 500).json({
+        status: err.status,
+        message: err.message,
+    })
+})
+
 module.exports = server
